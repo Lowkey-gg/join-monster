@@ -272,9 +272,8 @@ async function handleTable(
         tables,
         joinCondition
       )
-
       // limit has a highly similar approach to paginating
-    } else if (node.limit) {
+    } else if (node.limit && node.paginate === undefined) {
       node.args.first = node.limit
       await dialect.handleJoinedOneToManyPaginated(
         parent,
@@ -313,7 +312,7 @@ async function handleTable(
           batchScope,
           joinCondition
         )
-      } else if (node.limit) {
+      } else if (node.limit && node.paginate === undefined) {
         node.args.first = node.limit
         await dialect.handleBatchedManyToManyPaginated(
           parent,
@@ -363,7 +362,7 @@ async function handleTable(
         joinCondition1,
         joinCondition2
       )
-    } else if (node.limit) {
+    } else if (node.limit && node.paginate === undefined) {
       node.args.first = node.limit
       await dialect.handleJoinedManyToManyPaginated(
         parent,
@@ -398,7 +397,7 @@ async function handleTable(
         tables,
         batchScope
       )
-    } else if (node.limit) {
+    } else if (node.limit && node.paginate === undefined) {
       node.args.first = node.limit
       await dialect.handleBatchedOneToManyPaginated(
         parent,
