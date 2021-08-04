@@ -168,8 +168,8 @@ export function populateASTNode(
     gqlType = stripNonNullType(stripped.gqlType)
     queryASTNode = stripped.queryASTNode
     // we'll set a flag for pagination.
-    if (field.sqlPaginate) {
-      sqlASTNode.paginate = true
+    if (field.sqlPaginate !== undefined) {
+      sqlASTNode.paginate = field.sqlPaginate
     }
   } else if (field.sqlPaginate) {
     throw new Error(
